@@ -74,20 +74,20 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		<!--MYSQL Connector 
+		<!--MYSQL Connector -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
-		</dependency> -->
+		</dependency>
 		
-		<!--Postgre Connector --> 
+		<!--Postgre Connector  
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgre.version}</version>
 		</dependency>
-
+		-->
 
 		<!-- Servlet and JSP -->
 		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
@@ -157,7 +157,7 @@
 					</includes>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -192,7 +192,7 @@
                 </execution>
             </executions>
         </plugin>
-            
+
 		</plugins>
 	</build>
 
