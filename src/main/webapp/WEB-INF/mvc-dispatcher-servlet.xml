@@ -33,19 +33,34 @@
 	</bean>
 
 	<!-- DataSource -->
+	
+	<bean class="java.net.URI" id="dbUrl">
+	    <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+	</bean> 
+	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${database.driverClass}" />
-		<property name="jdbcUrl" value="${database.url}" />
-		<property name="user" value="${database.username}" />
-		<property name="password" value="${database.password}" />
+		<property name="jdbcUrl" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + @dbUrl.getPath() }" />
+		<property name="user" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
+		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
 
 		<property name="acquireIncrement" value="${connection.acquireIncrement}" />
 		<property name="minPoolSize" value="${connection.minPoolSize}" />
 		<property name="maxPoolSize" value="${connection.maxPoolSize}" />
 		<property name="maxIdleTime" value="${connection.maxIdleTime}" />
 	</bean>
+	
 
+
+	<!-- 
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	    <property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + @dbUrl.getPath() }"/>
+	    <property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
+	    <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
+	</bean>
+ -->
+ 
 	<!-- Hibernate SessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
